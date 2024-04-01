@@ -1,93 +1,44 @@
-<!DOCTYPE HTML>
-
-
-<!-- handles login -->
-<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Login</title>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-    <script src="login.js"></script>
-    <style>
-        #logo {
-            max-width: 100px;
-            max-height: 100px;
-            float: right;
-            margin-top: 20px;
-            margin-right: 20px;
-        }
-    </style>
-</head>
-<body>
--->
-
-
-
-    <!-- MSU Denver logo -->
-<!--
-    <img id="logo" src="assets/images/MSU_Denver_Roadrunners.svg.png" alt="Logo">
-    <h1>Teacher Login</h1>
-    <form id="loginForm">
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" required>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
--->
-
-
-<!-- Design for MSU Denver Bulletin board webpage--->
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metropolitan State University of Denver Bulletin Board</title>
+    <title>Authentication</title>
     <link rel="stylesheet" href="/assets/css/login.css">
 </head>
 <body>
-    <nav>
-        <a href="/index.html">Home</a>
-        <a href="/src/html/teacher_portal.html">Portal</a>
-        <a href="/src/html/test.html">Test</a>
-        <a href="/src/html/adminPanel.html">Admin Panel</a>
-    </nav>
-    <div class="container">
-        <div class="logo-background">
-            <div class="bulletin-board">
-                <span class="red-text">Bulletin</span> Board
-            </div>
-            <div class="date-time" id="date-time"></div>
-        </div> <!-- White rectangle at the top -->
-        <div class="footer-background"></div> <!-- White rectangle at the bottom -->
+    <header class="header">
         <div class="logo">
-            <img src="https://cdn.offcampusimages.com/public/upload/eagsvcpcbm1vru1k2u_taxmsbsflnehw4ztweyn_sng.png" alt="MSU Denver Logo" width="230">
+            <a href="index.html">
+                <img src="https://cdn.offcampusimages.com/public/upload/eagsvcpcbm1vru1k2u_taxmsbsflnehw4ztweyn_sng.png" alt="MSU Denver Logo" width="230">
+            </a>
         </div>
+        <h1>Authentication</h1>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown()">•••</button>
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="adminPanel.html">Admin Panel</a>
+            </div>
+        </div>
+    </header>
 
-        <!-- New Teacher Login Section -->
-        <div class="login-container">
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
-            <button type="submit" onclick="teacherLogin()">Login</button>
-        </div>
+    <div class="login-container">
+        <form id="loginForm" onsubmit="return teacherLogin();">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
     </div>
 
-
-    <script src="/assets/javascript/updateTime.js"></script>
-    <script src="/assets/javascript/teacherLogin.js"></script>
-
-    <script>
-        setInterval(updateTime, 1000); // Update the time every second
-        updateTime(); // Initialize with the current time
-    </script>
+    <script src="login.js"></script>
 </body>
 </html>
