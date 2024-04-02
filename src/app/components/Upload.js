@@ -1,5 +1,6 @@
+// components/FileUploadComponent.js
 import React, { useState } from 'react';
-import { storage } from '../../../firebase';
+import db from '../../../firebase';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -8,22 +9,22 @@ const Upload = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (file) {
-      const uploadTask = storage.ref(`uploads/${file.name}`).put(file);
-      uploadTask.on('state_changed',
-        (snapshot) => {
-          // Progress monitoring
-        },
-        (error) => {
-          // Handle errors
-          console.error(error);
-        },
-        () => {
-          // Handle successful upload
-          console.log('File uploaded successfully');
-        }
-      );
+      try {
+        const fileRef = db.collection('files').doc(); // Generate unique document ID
+        await fileRef.set({ name: file.name, url: '', timestamp: new Date() });
+
+        const storageRef = firebase.storage().ref(`files/${fileRef.id}`);
+        await storageRef.put(file);
+
+        const url = await storageRef.getDownloadURL();
+        await fileRef.update({ url });
+        
+        console.log('File uploaded successfully');
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
     }
   };
 

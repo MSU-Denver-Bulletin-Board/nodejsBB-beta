@@ -1,7 +1,6 @@
 // firebase.js
-import firebase from 'firebase/app';
-import "firebase/firestore"
-
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJUoCXfKCf3HEl3ml3PSKT0xqORFqgEJw",
@@ -13,13 +12,7 @@ const firebaseConfig = {
   measurementId: "G-HWBSP4CFJV"
 };
 
-try {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-} catch (error) {
-  console.error("Firebase initialization error", error.stack);
-}
-  
-const storageRef = firebase.storage()
-export { storageRef };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export default db;
