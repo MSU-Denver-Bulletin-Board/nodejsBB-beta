@@ -1,5 +1,5 @@
-// components/FileUploadComponent.js
 import React, { useState } from 'react';
+
 import db from '../../../firebase';
 
 const Upload = () => {
