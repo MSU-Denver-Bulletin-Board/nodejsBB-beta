@@ -3,10 +3,11 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Upload from "./components/Upload"
 // pages/index.js
-import FileUploadComponent from './components/Upload';
+// import FileUploadComponent from './components/Upload';
 
 export default function Home() {
-  return (
+
+  return(  
     <div className={styles.container}>
         <div className="logo-background">
             <div className="bulletin-board">
@@ -16,13 +17,10 @@ export default function Home() {
         <div className="logo">
             <img src="https://cdn.offcampusimages.com/public/upload/eagsvcpcbm1vru1k2u_taxmsbsflnehw4ztweyn_sng.png" alt="MSU Denver Logo" width="230"/>
         </div>
-        <div>
-          <h1>File Upload</h1>
-          <FileUploadComponent />
-        </div>
         <div className="footer-background">
           <div id="urgentMessageDisplay" className="urgent-message-ticker"></div>
         </div>
+        <Upload users="testUser" userId="testUserId" />
     </div>
    
   );

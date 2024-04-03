@@ -1,37 +1,42 @@
+import addData from "@/firebase/firestore/addData"
 import React, { useState } from 'react';
 
-import db from '../../../firebase';
-
-const Upload = () => {
+const Upload = (props) => {
   const [file, setFile] = useState(null);
-
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-  const handleUpload = async () => {
+  const handleForm = async () => {
+
     if (file) {
       try {
-        const fileRef = db.collection('files').doc(); // Generate unique document ID
-        await fileRef.set({ name: file.name, url: '', timestamp: new Date() });
+        // Extract file metadata
+        const { name, size, type } = file;
 
-        const storageRef = firebase.storage().ref(`files/${fileRef.id}`);
-        await storageRef.put(file);
+        // Store file metadata in Firestore
+        const data = {
+          name,
+          size,
+          type,
+          timestamp: new Date().getTime() // Store timestamp as milliseconds
+        };
 
-        const url = await storageRef.getDownloadURL();
-        await fileRef.update({ url });
-        
+        const {result, error} = await addData(props.users, props.userId, data)
+        if (error) {
+          return console.log(error)
+        }
+
         console.log('File uploaded successfully');
       } catch (error) {
         console.error('Error uploading file:', error);
       }
     }
-  };
-
+  }
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <button onClick={handleForm}>Upload!</button>
     </div>
   );
 };
