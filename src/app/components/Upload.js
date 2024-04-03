@@ -1,16 +1,23 @@
 import addData from "@/firebase/firestore/addData"
 import React, { useState } from 'react';
+import uploadFileToStorage from "@/firebase/storage/uploadFileToStorage"
 
-const Upload = (props) => {
+const Upload = () => {
   const [file, setFile] = useState(null);
+  const [collectionName, setCollectionName] = useState("");
+  const [id, setId] = useState("");
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-  const handleForm = async () => {
+  const handleForm = async (e) => {
+    e.preventDefault(); // Prevent form submission
 
-    if (file) {
+    if (file && collectionName && id) {
       try {
+        // Upload file to storage and get download URL
+        const imageUrl = await uploadFileToStorage(file);
         // Extract file metadata
         const { name, size, type } = file;
 
@@ -19,25 +26,38 @@ const Upload = (props) => {
           name,
           size,
           type,
+          imageUrl,
           timestamp: new Date().getTime() // Store timestamp as milliseconds
         };
 
-        const {result, error} = await addData(props.users, props.userId, data)
+        // Call addData function with input values
+        const { result, error } = await addData(collectionName, id, data);
         if (error) {
-          return console.log(error)
+          return console.log(error);
         }
 
         console.log('File uploaded successfully');
       } catch (error) {
         console.error('Error uploading file:', error);
       }
+    } else {
+      console.log("Please fill out all fields.");
     }
-  }
+  };
+
   return (
-    <div>
+    <form onSubmit={handleForm}>
+      <label>
+        Collection Name
+        <input type="text" name="collection" value={collectionName} onChange={(e) => setCollectionName(e.target.value)} />
+      </label>
+      <label>
+        ID
+        <input type="text" name="id" value={id} onChange={(e) => setId(e.target.value)} />
+      </label>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleForm}>Upload!</button>
-    </div>
+      <button type="submit">Upload!</button>
+    </form>
   );
 };
 
