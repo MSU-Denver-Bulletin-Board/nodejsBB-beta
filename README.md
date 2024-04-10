@@ -1,7 +1,46 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Firebase LocalHost
+Following this guide, we were able to set up a test web application that connects to firebase using nodejs: https://firebase.google.com/codelabs/firebase-nextjs#0
 
+Install nodejs here https://nodejs.org/en/download
+
+
+If you're cloning this repo to test on your own, please follow the guide to connect your firestore database to your repo 
+
+make sure you have npm and run these commands
+
+```
+npm install firebase
+npm update -g firebase-tools
+npm install -g firebase-tools
+```
+
+If you are trying to connect to a repo that already has firebase setup simply
+
+```
+firebase login
+```
+
+Once you are logged in and connected you can skip to step 5 of the guide to generate a private key, and enable webframeworks by
+```
+firebase experiments:enable webframeworks
+```
+
+Then to run the webapp on localhost using firebase hosting run
+```
+firebase emulators:start --only hosting
+```
+
+If you dont have a repo connect to firebase you will need to follow step 5 of the guide completely
+
+## Setting Up firebase
+...
+
+
+
+## Getting Started
+**Using node js alone, will not connect to firebase what this is**
 First, run the development server:
 
 ```bash
