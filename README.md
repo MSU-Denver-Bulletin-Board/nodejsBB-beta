@@ -3,6 +3,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Firebase LocalHost
 Following this guide, we were able to set up a test web application that connects to firebase using nodejs: https://firebase.google.com/codelabs/firebase-nextjs#0
 
+Our firebase trial has since ended. If this project would be continued we would have to start a new trial. 
+If you just want to connect a new firestore database follow the steps in the guide throught the firebase -init command,
+that command will help you connect your repo with firebase.
+
 Install nodejs here https://nodejs.org/en/download
 
 
@@ -34,13 +38,16 @@ firebase emulators:start --only hosting
 
 If you dont have a repo connect to firebase you will need to follow step 5 of the guide completely
 
-## Setting Up firebase
-...
+
+
+
+
+
 
 
 
 ## Getting Started
-**Using node js alone, will not connect to firebase what this is**
+**Using node js alone, will not connect to firebase**
 First, run the development server:
 
 ```bash
